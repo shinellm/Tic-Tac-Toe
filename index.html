@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TicTacToe">
+    <header>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, , shrink-to-fit=no">
+
+        <!-- CSS stylesheets-->
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="glyphter-font/css/Glyphter.css">
+        <link rel="stylesheet" href="style.css">
+        
+        <!-- Preloaded scripts-->
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="js/app.js"></script>
+    </header>
+    <body>
+        <div class="tic-tac-toe" ng-controller="TicTacToeController">
+            <h1 class="text-center">Tic-Tac-Toe</h1>
+
+            <div class="container">
+                <div class="text-center" ng-class="{'hide' : gameStarted}">
+                    <h2>Select the icon you would like to use:</h2>
+                    <br>
+                    <div class="icon-selector row">
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-circle"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-cross"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-check"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-heart"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-star"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-puzzle"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-alarm-clock"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-coffee-cup"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-camera"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-house"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-umbrella"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-smiley-face"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-thumbs-up"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-person"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-sun"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-bell"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-pen"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-pencil"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-music"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-mobile"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-desktop"></div>
+                            </button>
+                        </div>
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4">
+                            <button class="icon btn">
+                                <div class="icon-shopping-cart"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <button class="startBtn btn btn-default" ng-click="startGame()">Start Game</button>
+                    </div>
+                </div>
+
+                <div class="game-board row" ng-class="{'hide' : !gameStarted}" ng-model="gameBoard">
+                    <div class="board-row">
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row1Col1" ng-click="addMove('row1Col1')"></div>
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row1Col2" ng-click="addMove()"></div>
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row1Col3" ng-click="addMove()"></div>
+                    </div>
+                    <div class="board-row">
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row2Col1" ng-click="addMove()"></div>
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row2Col2" ng-click="addMove()"></div>
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row2Col3" ng-click="addMove()"></div>
+                    </div>
+                    <div class="board-row">
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row3Col1" ng-click="addMove()"></div>
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row3Col2" ng-click="addMove()"></div>
+                        <div class="board-tile col-xl-4 col-lg-4 col-md-4 col-sm-4" ng-model="row3Col3" ng-click="addMove()"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        <!-- jQuery, Popper.js, and Bootstraps JavaScript plugins -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</html>
+

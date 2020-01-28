@@ -1,0 +1,65 @@
+/* ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+} */
+
+.row {
+    margin: auto;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+/****** Tic-tac-toe Symbol Selections ******/
+.icon-selector {
+    height: 350px;
+    overflow: auto;
+    border: 2px solid aliceblue;
+    box-shadow: 1px 1px 4px 2px #888888;
+}
+.icon-container {
+    padding: 0;
+}
+.icon {
+    height: 100px;
+    width: 100px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #888888;
+    border-radius: 30px;
+    box-shadow: 5px 5px 4px 2px #888888;
+    font-size: 40px;
+}
+.icon.btn:hover, .icon.btn:active, .icon.btn:focus {
+    background-color: #19a4e67d;
+    border: 2px solid #41b8dc;
+    outline: none;
+}
+.startBtn.btn:hover, .startBtn.btn:active {
+    color: white;
+    background-color: #0081bf;
+    border-color: #0081bf;
+}
+
+/****** Tic-tac-toe Game ******/
+.game-board {
+    width: 300px;
+    height: 300px;
+}
+.board-row {
+
+}
+.board-tile {
+    height: 100px;
+    border: 1px solid black;
+}
