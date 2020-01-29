@@ -59,7 +59,13 @@
 .board-row {
 
 }
-.board-tile {
+.board-col {
     height: 100px;
     border: 1px solid black;
+}
+.playIcon {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
