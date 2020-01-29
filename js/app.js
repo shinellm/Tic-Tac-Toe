@@ -69,7 +69,7 @@
                 // event.target.className += ' playIcon ' + $scope.playerIcon;
                 console.log('row: ' + event.target.parentNode.title, 'col: ' + event.target.title);
                 updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
-                if ($scope.movesLeft !== 0) {
+                if ($scope.movesLeft > 0) {
                     cpuMove();
                 }
             }
