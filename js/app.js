@@ -41,6 +41,7 @@
                 [{symbol: ""},{symbol: ""},{symbol: ""}]
             ];
             $scope.gameStarted = false;
+            $scope.movesLeft = 9;
 
 
             $scope.setPlayerSymbol = function(event) {
@@ -68,7 +69,9 @@
                 // event.target.className += ' playIcon ' + $scope.playerIcon;
                 console.log('row: ' + event.target.parentNode.title, 'col: ' + event.target.title);
                 updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
-                cpuMove();
+                if ($scope.movesLeft !== 0) {
+                    cpuMove();
+                }
             }
 
             function pickRandomIcon() {
@@ -87,17 +90,21 @@
                 if ($scope.gameBoard[row][col].symbol !== "") {
                     cpuMove();
                 }
-                console.log('computer row: ' + row + ' col: ' + col)
-                $scope.gameBoard[row].splice(col, 1, {symbol: $scope.cpuPlayerIcon});
-
+                else {
+                    console.log('computer row: ' + row + ' col: ' + col)
+                    updateGameBoard(row, col, $scope.cpuPlayerIcon);
+                }
             };
 
             function updateGameBoard(row, col, symbol) {
-                $scope.gameBoard[row][col].symbol = symbol;
-                console.log($scope.gameBoard);
+                $scope.movesLeft -= 1;
+                $scope.gameBoard[row].splice(col, 1, {symbol: symbol});
+                // if ($scope.movesLeft <= 5) {
+                //     checkBoard(row, col, symbol);
+                // }
             }
 
-            function checkBoard() {
+            function checkBoard(row, col, symbol) {
                 
             }
         }
