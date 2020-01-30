@@ -122,14 +122,14 @@
 
             function updateGameBoard(row, col, symbol) {
                 if ($scope.gameBoard[row][col].symbol === "") {
-                    decreaseMovesLeft();
                     $scope.gameBoard[row].splice(col, 1, {symbol: symbol});
 
-                    if ($scope.movesLeft > 0) {
+                    decreaseMovesLeft();
+                    if ($scope.movesLeft >= 0) {
                         checkForWin(row, col, symbol);
-                    }
-                    else {
-                        showStatusMsg(symbol);
+                        if ($scope.movesLeft === 0 && $scope.gameStatus !== "game over") {
+                            showStatusMsg();
+                        }
                     }
                 }
             }
@@ -147,14 +147,15 @@
             function showStatusMsg(symbol) {
                 $scope.gameStatus = "game over";
 
-                if ($scope.movesLeft === 0) {
-                    $scope.gameStatusMsg = "It's a draw! Play again?"
-                }
-                else if ($scope.playerIcon === symbol) {
-                    $scope.gameStatusMsg = "You win! Play again?"
-                }
-                else {
-                    $scope.gameStatusMsg = "You Lose! Try again?"
+                switch(symbol) {
+                    case $scope.playerIcon:
+                        $scope.gameStatusMsg = "You win! Play again?"
+                        break;
+                    case $scope.cpuPlayerIcon:
+                        $scope.gameStatusMsg = "You Lose! Try again?"
+                        break;
+                    default:
+                        $scope.gameStatusMsg = "It's a draw! Play again?"
                 }
             }
 
