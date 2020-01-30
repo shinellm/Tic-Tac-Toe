@@ -19,6 +19,7 @@
             <h1 class="text-center">Tic-Tac-Toe</h1>
 
             <div class="container">
+                <!-- Main Menu Selector -->
                 <div class="text-center" ng-class="{'hide' : gameStarted}">
                     <h2>Select the icon you would like to use:</h2>
                     <br>
@@ -38,7 +39,27 @@
                         <button class="startBtn btn btn-default" ng-click="startGame()">Start Game</button>
                     </div>
                 </div>
-
+                <!-- Modal -->
+                <div class="modal fade in" id="gameStatusModal" ng-class="{'show' : gameStatus === 'game over'}" tabindex="-1" role="dialog" aria-labelledby="gameStatusModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="gameStatusModalLabel">Game Over</h5>
+                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button> -->
+                            </div>
+                            <div class="modal-body">
+                                <p>{{gameStatusMsg}}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="exitMatch()">Back to Main Menu</button>
+                                <button type="button" class="btn btn-primary" ng-click="newMatch()">Next Match</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Gameboard -->
                 <div class="game-board row" ng-class="{'hide' : !gameStarted}" ng-model="gameBoard">
                     <div class="board-row" title="{{$index}}" ng-repeat="row in gameBoard">
                         <div class="board-col playIcon {{col.symbol}} col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4" title="{{$index}}" ng-repeat="col in row" ng-click="playersMove($event)">

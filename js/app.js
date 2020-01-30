@@ -41,13 +41,13 @@
                 [{symbol: ""},{symbol: ""},{symbol: ""}]
             ];
             $scope.gameStarted = false;
+            $scope.gameStatus = "awaiting";
             $scope.movesLeft = 9;
 
 
             $scope.setPlayerSymbol = function(event) {
                 $scope.playerIcon = event.target.title;
                 $scope.iconSelected = true;
-                console.log($scope.playerIcon);
             };
 
             $scope.startGame = function() {
@@ -56,9 +56,8 @@
                     return;
                 }
                 $scope.gameStarted = true;
-                console.log('player icon : ' + $scope.playerIcon);
+                $scope.gameStatus = "in progress";
                 $scope.cpuPlayerIcon = pickRandomIcon();
-                console.log('cpu icon : ' + $scope.cpuPlayerIcon);
             };
 
             $scope.closeAlert = function() {
@@ -66,12 +65,35 @@
             };
 
             $scope.playersMove = function(event) {
-                // event.target.className += ' playIcon ' + $scope.playerIcon;
-                console.log('row: ' + event.target.parentNode.title, 'col: ' + event.target.title);
-                updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
-                if ($scope.movesLeft > 0) {
-                    cpuMove();
+                if ($scope.gameStatus === "in progress") {
+                    updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
                 }
+            }
+
+            $scope.newMatch = function() {
+                $scope.gameStatus = "in progress";
+                $scope.gameStatusMsg = "";
+                $scope.movesLeft = 9;
+                $scope.gameBoard = [
+                    [{symbol: ""},{symbol: ""},{symbol: ""}],
+                    [{symbol: ""},{symbol: ""},{symbol: ""}],
+                    [{symbol: ""},{symbol: ""},{symbol: ""}]
+                ];
+            }
+
+            $scope.exitMatch = function() {
+                $scope.gameStarted = false;
+                $scope.gameStatus = "awaiting";
+                $scope.gameStatusMsg = "";
+                $scope.movesLeft = 9;
+                $scope.gameBoard = [
+                    [{symbol: ""},{symbol: ""},{symbol: ""}],
+                    [{symbol: ""},{symbol: ""},{symbol: ""}],
+                    [{symbol: ""},{symbol: ""},{symbol: ""}]
+                ];
+                $scope.iconSelected = false;
+                $scope.playerIcon = "";
+                $scope.cpuPlayerIcon = "";
             }
 
             function pickRandomIcon() {
@@ -91,21 +113,82 @@
                     cpuMove();
                 }
                 else {
-                    console.log('computer row: ' + row + ' col: ' + col)
                     updateGameBoard(row, col, $scope.cpuPlayerIcon);
                 }
             };
 
             function updateGameBoard(row, col, symbol) {
-                $scope.movesLeft -= 1;
-                $scope.gameBoard[row].splice(col, 1, {symbol: symbol});
-                // if ($scope.movesLeft <= 5) {
-                //     checkBoard(row, col, symbol);
-                // }
+                if ($scope.gameBoard[row][col].symbol === "") {
+                    decreaseMovesLeft();
+                    $scope.gameBoard[row].splice(col, 1, {symbol: symbol});
+
+                    if ($scope.movesLeft > 0) {
+                        checkForWin(row, col, symbol);
+                        if (symbol === $scope.playerIcon) {
+                            cpuMove();
+                        }
+                    }
+                    else {
+                        showStatusMsg(symbol);
+                    }
+                }
             }
 
-            function checkBoard(row, col, symbol) {
+            function decreaseMovesLeft() {
+                $scope.movesLeft -= 1;
+            }
+
+            function checkForWin(row, col, symbol) {
+                if (checkRowsForWin(row, symbol) || checkColumnsForWin(col, symbol) || checkDiagonalsForWin(symbol)) {
+                    showStatusMsg(symbol);
+                }
+            }
+
+            function showStatusMsg(symbol) {
+                $scope.gameStatus = "game over";
+
+                if ($scope.movesLeft === 0) {
+                    $scope.gameStatusMsg = "It's a draw! Play again?"
+                }
+                else if ($scope.playerIcon === symbol) {
+                    $scope.gameStatusMsg = "You win! Play again?"
+                }
+                else {
+                    $scope.gameStatusMsg = "You Lose! Try again?"
+                }
+            }
+
+            function checkRowsForWin(row, symbol) {
+                for (var i = 0; i < 3; i++) {
+                    if ($scope.gameBoard[row][i].symbol !== symbol) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function checkColumnsForWin(col, symbol) {
+                for (var i = 0; i < 3; i++) {
+                    if ($scope.gameBoard[i][col].symbol !== symbol) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function checkDiagonalsForWin(symbol) {
+                var diagonalWin1 = true;
+                var diagonalWin2 = true;
                 
+                for (var i = 0; i < 3; i++) {
+                    if ($scope.gameBoard[i][i].symbol !== symbol) {
+                        diagonalWin1 = false;
+                    }
+                    if ($scope.gameBoard[2-i][i].symbol !== symbol) {
+                        diagonalWin2 = false;
+                    }
+                }
+                return diagonalWin1 || diagonalWin2;
             }
         }
     }

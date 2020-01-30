@@ -11,12 +11,12 @@
 .row {
     margin: auto;
 }
-.hide {
+/* .hide {
     display: none;
 }
 .show {
     display: block;
-}
+} */
 /****** Tic-tac-toe Symbol Selections ******/
 .icon-selector {
     height: 350px;
@@ -49,6 +49,35 @@
     color: white;
     background-color: #0081bf;
     border-color: #0081bf;
+}
+
+/****** GameStatus Modal ******/
+#gameStatusModal.modal {
+    background-color: #80808057;
+}
+#gameStatusModal .modal-dialog {
+    height: 100%;
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#gameStatusModal .modal-body {
+    text-align: center;
+}
+#gameStatusModal .modal-body p {
+    margin: 10px 0px;
+}
+#gameStatusModal .modal-header, #gameStatusModal .modal-footer {
+    background-color: #19a4e67d;
+}
+#gameStatusModal .modal-footer button.btn.btn-secondary {
+    border-color: #6a9ecc;
+}
+
+#gameStatusModal .modal-footer button.btn.btn-secondary:hover {
+    background-color: #d6d6d6;
+    border-color: #204d74;
 }
 
 /****** Tic-tac-toe Game ******/
