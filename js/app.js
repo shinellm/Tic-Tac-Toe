@@ -67,6 +67,9 @@
             $scope.playersMove = function(event) {
                 if ($scope.gameStatus === "in progress") {
                     updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
+                    if ($scope.gameStatus !== "game over") {
+                        cpuMove();
+                    }
                 }
             }
 
@@ -124,9 +127,6 @@
 
                     if ($scope.movesLeft > 0) {
                         checkForWin(row, col, symbol);
-                        if (symbol === $scope.playerIcon) {
-                            cpuMove();
-                        }
                     }
                     else {
                         showStatusMsg(symbol);
