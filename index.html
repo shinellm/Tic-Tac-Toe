@@ -7,7 +7,7 @@
 
         <!-- CSS stylesheets-->
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="glyphter-font/css/Glyphter.css">
+        <link rel="stylesheet" href="glyphter-font/css/Tic-Tac-Toe.css">
         <link rel="stylesheet" href="style.css">
         
         <!-- Preloaded scripts-->
@@ -19,28 +19,41 @@
             <h1 class="text-center">Tic-Tac-Toe</h1>
 
             <div class="container">
-                <!-- Main Menu Selector -->
-                <div class="text-center" ng-class="{'hide' : gameStarted}">
-                    <h2>Select the icon you would like to use:</h2>
-                    <br>
-                    <div class="icon-selector row">
-                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
-                            <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event)"></button>
+                <!-- Main Menu: Mode Selector -->
+                <div class="main-menu text-center slide-top" ng-class="{'fade': modeSelected}">
+                    <h2>Select a game mode:</h2>
+                    <div class="mode-selector row" >
+                        <div class="mode-container col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-repeat="mode in modes">
+                            <button class="mode {{mode.name}} flip-vertical-left btn" title="{{mode.title}}" ng-click="setGameMode($event)">
+                                <!-- <img src="{{mode.name}}.png"> -->
+                                <div class="mode-title text-center" title="{{mode.title}}">{{mode.title}}</div>
+                            </button>
                         </div>
                     </div>
-                    <br>
-                    <div class="alert alert-info fade in alert-dismissible" ng-class="{'hide' : !alertMsg}">
+                </div>
+                <!-- Main Menu: Icon Selector -->
+                <div class="icon-menu text-center slide-top" ng-class="{'hide' : gameStarted || !modeSelected}">
+                    <h2>Select the icon you would like:</h2>
+                    <div class="icon-alert alert alert-info fade alert-dismissible" ng-class="{'in' : alertMsg}">
                         To play the game, you must first select an icon.
                         <button type="button" class="close" aria-label="Close" ng-click="closeAlert()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="icon-selector row">
+                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
+                            <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event)">
+                                <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
+                            </button>
+                        </div>
+                    </div>
+                    <br>
                     <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <button class="startBtn btn btn-default" ng-click="startGame()">Start Game</button>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade in" id="gameStatusModal" ng-class="{'show' : gameStatus === 'game over'}" tabindex="-1" role="dialog" aria-labelledby="gameStatusModalLabel" aria-hidden="true">
+                <div class="modal fade" id="gameStatusModal" ng-class="{'in' : gameStatus === 'game over'}" tabindex="-1" role="dialog" aria-labelledby="gameStatusModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
