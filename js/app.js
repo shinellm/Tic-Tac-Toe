@@ -36,12 +36,15 @@
                 {name: "icon-desktop"},
                 {name: "icon-shopping-cart"}
             ];
-            $scope.iconSelected = false;
+            $scope.headers = [
+                {name: "iconsSetOne", title: "Player 1's Icons", header: "iconsHeadingOne", player: 1},
+                {name: "iconsSetTwo", title: "Player 2's Icons", header: "iconsHeadingTwo", player: 2}
+            ];
             $scope.alertMsg = false;
             $scope.playerIcon = "";
             $scope.cpuPlayerIcon = "";
-            // $scope.player1Icon = "";
-            // $scope.player2Icon = "";
+            $scope.player1Icon = "";
+            $scope.player2Icon = "";
             $scope.player1Move = false;
             $scope.player2Move = false;
             $scope.gameBoard = [
@@ -60,31 +63,40 @@
                 console.log(event.target);
                 console.log(event.target.title);
                 $scope.gameMode = event.target.title;
-                if ($scope.gameMode === 'single-player') {
-                    
-                }
-                else {
-
-                }
             };
 
-            $scope.setPlayerSymbol = function(event) {
-                console.log('player symbol: ', event.target);
-                $scope.playerIcon = event.target.title;
-                if ($scope.playerIcon === 'icon-random') {
-                    $scope.playerIcon = pickRandomIcon();
+            $scope.setPlayerSymbol = function(event, player) {
+                switch (player) {
+                    case 1:
+                        $scope.player1Icon = event.target.title;
+                        if ($scope.player1Icon === 'icon-random') {
+                            $scope.player1Icon = pickRandomIcon();
+                        }
+                        break;
+                    case 2:
+                        $scope.player2Icon = event.target.title;
+                        if ($scope.player2Icon === 'icon-random') {
+                            $scope.player2Icon = pickRandomIcon();
+                        }
+                        break;
+                    default:
+                        $scope.playerIcon = event.target.title;
+                        if ($scope.playerIcon === 'icon-random') {
+                            $scope.playerIcon = pickRandomIcon();
+                        }
                 }
-                $scope.iconSelected = true;
+                console.log('player symbol: ', $scope.playerIcon);
+                console.log('player 1 symbol: ', $scope.player1Icon);
+                console.log('player 2 symbol: ', $scope.player2Icon);
             };
 
             $scope.startGame = function() {
-                if ($scope.iconSelected === false) {
-                    $scope.alertMsg = true;
+                if (checkAlertStatus() === true) {
                     return;
-                }
+                };
                 $scope.gameStarted = true;
                 $scope.gameStatus = "in progress";
-                $scope.cpuPlayerIcon = pickRandomIcon();
+                $scope.cpuPlayerIcon = ($scope.gameMode === 'single-player') ? pickRandomIcon() : "";
                 $scope.player1Move = true;
             };
 
@@ -93,13 +105,23 @@
             };
 
             $scope.playersMove = function(event) {
-                if ($scope.gameStatus === "in progress" && $scope.player1Move === true && $scope.gameMode === 'single-player') {
+                if ($scope.gameStatus === "in progress") {
                     console.log('player move: ', event.target);
                     console.log('player: ', $scope.playerIcon);
                     console.log('cpu: ' + $scope.cpuPlayerIcon);
-                    updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
-                    if ($scope.gameStatus !== "game over" && $scope.player2Move === true) {
-                        cpuMove();
+                    if ($scope.gameMode === 'single-player') {
+                        updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
+                        if ($scope.gameStatus !== "game over" && $scope.player2Move === true) {
+                            cpuMove();
+                        }
+                    }
+                    else if ($scope.gameMode === 'two-player') {
+                        if ($scope.player1Move) {
+                            updateGameBoard(event.target.parentNode.title, event.target.title, $scope.player1Icon);
+                        }
+                        else if ($scope.player2Move) {
+                            updateGameBoard(event.target.parentNode.title, event.target.title, $scope.player2Icon);
+                        }
                     }
                 }
             }
@@ -129,11 +151,10 @@
                     [{symbol: ""},{symbol: ""},{symbol: ""}],
                     [{symbol: ""},{symbol: ""},{symbol: ""}]
                 ];
-                $scope.iconSelected = false;
                 $scope.playerIcon = "";
                 $scope.cpuPlayerIcon = "";
-                // $scope.player1Icon = "";
-                // $scope.player2Icon = "";
+                $scope.player1Icon = "";
+                $scope.player2Icon = "";
                 $scope.player1Move = false;
                 $scope.player2Move = false;
             }
@@ -145,6 +166,16 @@
 
             function getRandomInt(max) {
                 return Math.floor(Math.random() * Math.floor(max));
+            }
+
+            function checkAlertStatus() {
+                if ($scope.gameMode === 'single-player' && $scope.playerIcon === "") {
+                    $scope.alertMsg = true;
+                }
+                else if ($scope.gameMode === 'two-player' && ($scope.player1Icon === "" || $scope.player2Icon === "")) {
+                    $scope.alertMsg = true;
+                }
+                return $scope.alertMsg;
             }
 
             function cpuMove() {
@@ -207,6 +238,12 @@
                         break;
                     case $scope.cpuPlayerIcon:
                         $scope.gameStatusMsg = "You Lose! Try again?"
+                        break;
+                    case $scope.player1Icon:
+                        $scope.gameStatusMsg = "Player 1 Wins! Try again?"
+                        break;
+                    case $scope.player2Icon:
+                        $scope.gameStatusMsg = "Player 2 Wins! Try again?"
                         break;
                     default:
                         $scope.gameStatusMsg = "It's a draw! Play again?"

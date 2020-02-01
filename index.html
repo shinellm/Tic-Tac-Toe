@@ -34,17 +34,49 @@
                 <!-- Main Menu: Icon Selector -->
                 <div class="icon-menu text-center slide-top" ng-class="{'hide' : gameStarted || !modeSelected}">
                     <h2>Select the icon you would like:</h2>
-                    <div class="icon-alert alert alert-info fade alert-dismissible" ng-class="{'in' : alertMsg}">
-                        To play the game, you must first select an icon.
-                        <button type="button" class="close" aria-label="Close" ng-click="closeAlert()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="icon-selector row">
-                        <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
-                            <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event)">
-                                <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
+                    <!-- Main Menu: Icon Selector (One-Player) -->
+                    <div ng-if="gameMode === 'single-player'">
+                        <div class="icon-alert alert alert-info fade alert-dismissible" ng-class="{'in' : alertMsg}">
+                            To play the game, you must first select an icon.
+                            <button type="button" class="close" aria-label="Close" ng-click="closeAlert()">
+                                <span aria-hidden="true">&times;</span>
                             </button>
+                        </div>
+                        <div class="icon-selector row">
+                            <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
+                                <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event)">
+                                    <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Main Menu: Icon Selector (Two-Players) -->
+                    <div ng-if="gameMode === 'two-player'">
+                        <div class="icon-alert alert alert-info fade alert-dismissible" ng-class="{'in' : alertMsg}">
+                            To play the game, you must first select an icon.
+                            <button type="button" class="close" aria-label="Close" ng-click="closeAlert()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="accordion" id="two-player-selector">
+                            <div class="card" ng-repeat="info in headers">
+                                <div class="card-header" id="{{info.header}}">
+                                    <h2 class="title">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{info.name}}"
+                                            aria-expanded="true" aria-controls="{{info.name}}">
+                                            {{info.title}}
+                                        </button>
+                                    </h2>
+                                </div>
+                        
+                                <div id="{{info.name}}" class="icon-selector row collapse in show" aria-labelledby="{{info.header}}" data-parent="#two-player-selector" aria-expanded="true">
+                                    <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
+                                        <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event, info.player)">
+                                            <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br>
