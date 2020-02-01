@@ -33,7 +33,7 @@
                 </div>
                 <!-- Main Menu: Icon Selector -->
                 <div class="icon-menu text-center slide-top" ng-class="{'hide' : gameStarted || !modeSelected}">
-                    <h2>Select the icon you would like:</h2>
+                    <h2>Select an icon:</h2>
                     <!-- Main Menu: Icon Selector (One-Player) -->
                     <div ng-if="gameMode === 'single-player'">
                         <div class="icon-alert alert alert-info fade alert-dismissible" ng-class="{'in' : alertMsg}">
@@ -71,7 +71,7 @@
                         
                                 <div id="{{info.name}}" class="icon-selector row collapse" aria-labelledby="{{info.header}}" aria-expanded="true">
                                     <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
-                                        <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-class="{'selected': (icon.name === player1Icon && info.player === 1) || (icon.name === player2Icon && info.player === 2)}" ng-click="setPlayerSymbol($event, info.player)">
+                                        <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-disabled="(icon.name === player1Icon && info.player === 2) || (icon.name === player2Icon && info.player === 1)" ng-class="{'selected': (icon.name === player1Icon && info.player === 1) || (icon.name === player2Icon && info.player === 2)}" ng-click="setPlayerSymbol($event, info.player)">
                                             <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
                                         </button>
                                     </div>

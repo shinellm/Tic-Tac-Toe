@@ -144,7 +144,7 @@ h2 {
     margin: auto;
 }
 .icon-selector {
-    height: 350px;
+    height: 320px;
     overflow: auto;
     border: 2px solid aliceblue;
     box-shadow: 1px 1px 4px 2px #888888;
@@ -264,7 +264,7 @@ h2 {
     box-shadow: none;
 }
 .icon-selector.collapse.in {
-    height: 350px !important;
+    height: 320px !important;
     overflow: auto;
     border: 2px solid aliceblue;
     box-shadow: 1px 1px 4px 2px #888888;
@@ -310,12 +310,21 @@ h2 {
     width: 300px;
     height: 300px;
 }
-.board-row {
-
-}
 .board-col {
     height: 100px;
-    border: 1px solid black;
+    border: 1.5px solid #41b8dc;
+}
+.board-row:first-child .board-col {
+    border-top: 0;
+}
+.board-row:last-child .board-col {
+    border-bottom: 0;
+}
+.board-col:first-child {
+    border-left: 0;
+}
+.board-col:last-child {
+    border-right: 0;
 }
 .playIcon {
     font-size: 40px;

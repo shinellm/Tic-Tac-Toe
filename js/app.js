@@ -70,13 +70,13 @@
                     case 1:
                         $scope.player1Icon = event.target.title;
                         if ($scope.player1Icon === 'icon-random') {
-                            $scope.player1Icon = pickRandomIcon();
+                            $scope.player1Icon = pickRandomIcon($scope.player2Icon);
                         }
                         break;
                     case 2:
                         $scope.player2Icon = event.target.title;
                         if ($scope.player2Icon === 'icon-random') {
-                            $scope.player2Icon = pickRandomIcon();
+                            $scope.player2Icon = pickRandomIcon($scope.player1Icon);
                         }
                         break;
                     default:
@@ -96,7 +96,7 @@
                 };
                 $scope.gameStarted = true;
                 $scope.gameStatus = "in progress";
-                $scope.cpuPlayerIcon = ($scope.gameMode === 'single-player') ? pickRandomIcon() : "";
+                $scope.cpuPlayerIcon = ($scope.gameMode === 'single-player') ? pickRandomIcon($scope.playerIcon) : "";
                 $scope.player1Move = true;
             };
 
@@ -161,9 +161,9 @@
                 $scope.player2Move = false;
             }
 
-            function pickRandomIcon() {
+            function pickRandomIcon(notAllowed) {
                 var randomIcon = $scope.icons[getRandomInt($scope.icons.length)].name;
-                return (randomIcon !== $scope.playerIcon && randomIcon !== 'icon-random') ? randomIcon : pickRandomIcon();
+                return (randomIcon !== notAllowed && randomIcon !== 'icon-random') ? randomIcon : pickRandomIcon(notAllowed);
             }
 
             function getRandomInt(max) {
