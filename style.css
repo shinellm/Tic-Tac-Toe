@@ -115,7 +115,7 @@
 }
 .icon-alert.alert-dismissible .close {
     position: absolute;
-    height: auto;
+    height: 100%;
     top: 0;
     right: 0;
     padding: 1rem 1.25rem;
