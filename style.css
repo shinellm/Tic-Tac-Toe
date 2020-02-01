@@ -107,7 +107,7 @@
     border: 0;
     padding: 0;
     margin: 0;
-    inline-size: max-content;
+    inline-size: auto;
     transition: all 0.2s ease-in-out;
 }
 .icon-alert *  {
