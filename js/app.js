@@ -135,8 +135,10 @@
                     [{symbol: ""},{symbol: ""},{symbol: ""}],
                     [{symbol: ""},{symbol: ""},{symbol: ""}]
                 ];
-                $scope.player1Move = true;
-                $scope.player2Move = false;
+                otherPlayersTurn();
+                if ($scope.player2Move === true && $scope.gameMode === 'single-player') {
+                    cpuMove();
+                }
             }
 
             $scope.exitMatch = function() {
@@ -202,7 +204,7 @@
                             showStatusMsg();
                         }
                         else {
-                            otherPlayersTurn()
+                            otherPlayersTurn();
                         }
                     }
                 }

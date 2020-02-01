@@ -200,7 +200,15 @@ h2 {
 }
 
 /************ One-Player Icon Selector ************/
-.icon.btn:hover, .icon.btn:active, .icon.btn:focus {
+.icon.btn:focus {
+    outline: none;
+}
+.icon.btn:hover, .icon.btn:active, .icon.btn.selected {
+    background-color: #19a4e67d;
+    border: 2px solid #41b8dc;
+    outline: none;
+}
+.icon.btn.selected {
     background-color: #19a4e67d;
     border: 2px solid #41b8dc;
     outline: none;
@@ -213,6 +221,7 @@ h2 {
 
 /************ Two-Player Icon Selector ************/
 .card {
+    margin: 0;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -260,12 +269,7 @@ h2 {
     border: 2px solid aliceblue;
     box-shadow: 1px 1px 4px 2px #888888;
 }
-#iconsSetOne.collapse.in {
-    border: 0;
-    border-top: 2px solid aliceblue;
-    box-shadow: none;
-}
-#iconsSetTwo.collapse.in {
+#iconsSetOne.collapsing, #iconsSetTwo.collapsing, #iconsSetOne.collapse.in, #iconsSetTwo.collapse.in {
     border: 0;
     border-top: 2px solid aliceblue;
     box-shadow: none;

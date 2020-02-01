@@ -44,7 +44,7 @@
                         </div>
                         <div class="icon-selector row">
                             <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
-                                <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event)">
+                                <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-class="{'selected': icon.name === playerIcon}" ng-click="setPlayerSymbol($event)">
                                     <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
                                 </button>
                             </div>
@@ -62,16 +62,16 @@
                             <div class="card" ng-repeat="info in headers">
                                 <div class="card-header" id="{{info.header}}">
                                     <h2 class="title">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{info.name}}"
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-parent="#two-player-selector" data-target="#{{info.name}}"
                                             aria-expanded="true" aria-controls="{{info.name}}">
                                             {{info.title}}
                                         </button>
                                     </h2>
                                 </div>
                         
-                                <div id="{{info.name}}" class="icon-selector row collapse in show" aria-labelledby="{{info.header}}" data-parent="#two-player-selector" aria-expanded="true">
+                                <div id="{{info.name}}" class="icon-selector row collapse" aria-labelledby="{{info.header}}" aria-expanded="true">
                                     <div class="icon-container col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-4" ng-repeat="icon in icons">
-                                        <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-click="setPlayerSymbol($event, info.player)">
+                                        <button class="icon {{icon.name}} btn" title="{{icon.name}}" ng-class="{'selected': (icon.name === player1Icon && info.player === 1) || (icon.name === player2Icon && info.player === 2)}" ng-click="setPlayerSymbol($event, info.player)">
                                             <div ng-if="icon.title" title="{{icon.name}}" class="icon-title text-center">{{icon.title}}</div>
                                         </button>
                                     </div>
