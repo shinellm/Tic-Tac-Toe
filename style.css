@@ -220,7 +220,7 @@ h2 {
 }
 
 /************ Two-Player Icon Selector ************/
-.card {
+.panel {
     margin: 0;
     position: relative;
     display: flex;
@@ -232,20 +232,20 @@ h2 {
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
-.card:first-child {
+.panel:first-child {
     border-radius: 0.75rem 0.75rem 0 0;
 }
-.card:last-child {
+.panel:last-child {
     border-top: 0;
     border-radius: 0 0 0.75rem 0.75rem;
 }
-.card-header {
+.panel-header {
     padding: 1.5rem 1.25rem;
     border-radius: 0;
     margin-bottom: -1px;
     background-color: rgba(0,0,0,.03);
 }
-.card-header .title {
+.panel-header .title {
     margin: 0;
     font-size: 2rem;
 }
