@@ -40,6 +40,10 @@
                 {name: "iconsSetOne", title: "Player 1's Icons", header: "iconsHeadingOne", player: 1},
                 {name: "iconsSetTwo", title: "Player 2's Icons", header: "iconsHeadingTwo", player: 2}
             ];
+            $scope.players = [
+                {name: "", title: "Player 1", player: 'one', wins: 0},
+                {name: "", title: "Player 2", player: 'two', wins: 0}
+            ];
             $scope.alertMsg = false;
             $scope.playerIcon = "";
             $scope.cpuPlayerIcon = "";
@@ -72,20 +76,26 @@
                         if ($scope.player1Icon === 'icon-random') {
                             $scope.player1Icon = pickRandomIcon($scope.player2Icon);
                         }
+                        $scope.players[0].name = $scope.player1Icon;
                         break;
                     case 2:
                         $scope.player2Icon = event.target.title;
                         if ($scope.player2Icon === 'icon-random') {
                             $scope.player2Icon = pickRandomIcon($scope.player1Icon);
                         }
+                        $scope.players[1].name = $scope.player2Icon;
                         break;
                     default:
                         $scope.playerIcon = event.target.title;
                         if ($scope.playerIcon === 'icon-random') {
                             $scope.playerIcon = pickRandomIcon();
                         }
+                        $scope.cpuPlayerIcon = pickRandomIcon($scope.playerIcon);
+                        $scope.players[0].name = $scope.playerIcon;
+                        $scope.players[1].name = $scope.cpuPlayerIcon;
                 }
                 console.log('player symbol: ', $scope.playerIcon);
+                console.log('cpu: ' + $scope.cpuPlayerIcon);
                 console.log('player 1 symbol: ', $scope.player1Icon);
                 console.log('player 2 symbol: ', $scope.player2Icon);
             };
@@ -96,7 +106,6 @@
                 };
                 $scope.gameStarted = true;
                 $scope.gameStatus = "in progress";
-                $scope.cpuPlayerIcon = ($scope.gameMode === 'single-player') ? pickRandomIcon($scope.playerIcon) : "";
                 $scope.player1Move = true;
             };
 
@@ -107,8 +116,6 @@
             $scope.playersMove = function(event) {
                 if ($scope.gameStatus === "in progress") {
                     console.log('player move: ', event.target);
-                    console.log('player: ', $scope.playerIcon);
-                    console.log('cpu: ' + $scope.cpuPlayerIcon);
                     if ($scope.gameMode === 'single-player') {
                         updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
                         if ($scope.gameStatus !== "game over" && $scope.player2Move === true) {
@@ -153,6 +160,10 @@
                     [{symbol: ""},{symbol: ""},{symbol: ""}],
                     [{symbol: ""},{symbol: ""},{symbol: ""}]
                 ];
+                $scope.players = [
+                    {name: "", title: "Player 1", player: 'one', wins: 0},
+                    {name: "", title: "Player 2", player: 'two', wins: 0}
+                ];
                 $scope.playerIcon = "";
                 $scope.cpuPlayerIcon = "";
                 $scope.player1Icon = "";
@@ -176,6 +187,9 @@
                 }
                 else if ($scope.gameMode === 'two-player' && ($scope.player1Icon === "" || $scope.player2Icon === "")) {
                     $scope.alertMsg = true;
+                }
+                else {
+                    $scope.alertMsg = false;
                 }
                 return $scope.alertMsg;
             }
@@ -237,15 +251,19 @@
                 switch(symbol) {
                     case $scope.playerIcon:
                         $scope.gameStatusMsg = "You win! Play again?"
+                        $scope.players[0].wins += 1;
                         break;
                     case $scope.cpuPlayerIcon:
                         $scope.gameStatusMsg = "You Lose! Try again?"
+                        $scope.players[1].wins += 1;
                         break;
                     case $scope.player1Icon:
                         $scope.gameStatusMsg = "Player 1 Wins! Try again?"
+                        $scope.players[0].wins += 1;
                         break;
                     case $scope.player2Icon:
                         $scope.gameStatusMsg = "Player 2 Wins! Try again?"
+                        $scope.players[1].wins += 1;
                         break;
                     default:
                         $scope.gameStatusMsg = "It's a draw! Play again?"

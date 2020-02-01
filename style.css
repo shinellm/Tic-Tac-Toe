@@ -141,7 +141,13 @@
     z-index: 1050;
 }
 
-/************ Tic-tac-toe Main Menu ************/
+/************ Tic-tac-toe ************/
+html, body {
+    height: 100%;
+}
+.tic-tac-toe {
+    height: 100%;
+}
 h1 {
     font-size: 5rem;
     margin-bottom: 15px;
@@ -150,10 +156,14 @@ h2 {
     font-size: 2.75rem;
     margin-bottom: 40px;
 }
+.container {
+    height: 100%;
+}
 .row {
     width: 100%;
     margin: auto;
 }
+/************ Tic-tac-toe Main Menu ************/
 .icon-selector {
     height: 320px;
     overflow: auto;
@@ -163,7 +173,7 @@ h2 {
 .icon-container, .mode-container {
     padding: 0;
 }
-.icon, .mode {
+.icon, .mode, .player {
     height: 100px;
     width: 100px;
     margin: 15px auto;
@@ -180,10 +190,10 @@ h2 {
 .mode {
     transition: 0.4s ease-in-out color, 0.4s ease-in-out background-color;
 }
-.mode.icon-single-player {
+.mode.icon-single-player, .player.one {
     margin: 15px 15% 15px auto;
 }
-.mode.icon-two-player {
+.mode.icon-two-player, .player.two {
     margin: 15px auto 15px 15%;
 }
 .icon-random {
@@ -194,7 +204,7 @@ h2 {
     background-color: white;
     border-radius: 30px;
 }
-.mode .mode-title, .icon .icon-title{
+.mode .mode-title, .icon .icon-title, .player .player-title{
     font-size: 14px;
 }
 .mode.btn:hover .mode-title {
@@ -318,6 +328,12 @@ h2 {
 
 /************ Tic-tac-toe Gameboard ************/
 .game-board {
+    height: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.board {
     width: 300px;
     height: 300px;
 }
@@ -336,6 +352,17 @@ h2 {
 }
 .board-col:last-child {
     border-right: 0;
+}
+.player {
+    box-shadow: none;
+}
+.player-title hr {
+    margin: 5px 0;
+}
+.player.selected {
+    color: white;
+    background-color: #19a4e67d;
+    border: 2px solid #41b8dc;
 }
 .playIcon {
     font-size: 40px;
