@@ -4,9 +4,9 @@
     angular.module('TicTacToe', [])
         .controller('TicTacToeController', TicTacToeController);
 
-        TicTacToeController.$inject = ['$scope'];
+        TicTacToeController.$inject = ['$scope', '$timeout'];
         
-        function TicTacToeController($scope) {
+        function TicTacToeController($scope, $timeout) {
             $scope.modes = [
                 {name: "icon-single-player", title: "single-player"},
                 {name: "icon-two-player", title: "two-player"}
@@ -64,8 +64,6 @@
 
             $scope.setGameMode = function(event) {
                 $scope.modeSelected = true;
-                console.log(event.target);
-                console.log(event.target.title);
                 $scope.gameMode = event.target.title;
             };
 
@@ -94,10 +92,6 @@
                         $scope.players[0].name = $scope.playerIcon;
                         $scope.players[1].name = $scope.cpuPlayerIcon;
                 }
-                console.log('player symbol: ', $scope.playerIcon);
-                console.log('cpu: ' + $scope.cpuPlayerIcon);
-                console.log('player 1 symbol: ', $scope.player1Icon);
-                console.log('player 2 symbol: ', $scope.player2Icon);
             };
 
             $scope.startGame = function() {
@@ -115,11 +109,10 @@
 
             $scope.playersMove = function(event) {
                 if ($scope.gameStatus === "in progress") {
-                    console.log('player move: ', event.target);
-                    if ($scope.gameMode === 'single-player') {
+                    if ($scope.gameMode === 'single-player' && $scope.player1Move === true) {
                         updateGameBoard(event.target.parentNode.title, event.target.title, $scope.playerIcon);
                         if ($scope.gameStatus !== "game over" && $scope.player2Move === true) {
-                            cpuMove();
+                            $timeout(function() {cpuMove()}, 1000);
                         }
                     }
                     else if ($scope.gameMode === 'two-player') {
@@ -211,7 +204,6 @@
                     $scope.gameBoard[row].splice(col, 1, {symbol: symbol});
 
                     decreaseMovesLeft();
-                    console.log($scope.movesLeft)
                     if ($scope.movesLeft >= 0) {
                         checkForWin(row, col, symbol);
                         if ($scope.movesLeft === 0 && $scope.gameStatus !== "game over") {
@@ -235,10 +227,6 @@
             }
 
             function checkForWin(row, col, symbol) {
-                console.log($scope.gameBoard)
-                console.log('row win: ' + checkRowsForWin(row, symbol))
-                console.log('col win: ' + checkColumnsForWin(col, symbol))
-                console.log('diag win: ' + checkDiagonalsForWin(symbol))
                 if (checkRowsForWin(row, symbol) || checkColumnsForWin(col, symbol) || checkDiagonalsForWin(symbol)) {
                     showStatusMsg(symbol);
                 }
@@ -246,7 +234,6 @@
 
             function showStatusMsg(symbol) {
                 $scope.gameStatus = "game over";
-                console.log(symbol)
 
                 switch(symbol) {
                     case $scope.playerIcon:
@@ -268,7 +255,6 @@
                     default:
                         $scope.gameStatusMsg = "It's a draw! Play again?"
                 }
-                console.log($scope.gameStatusMsg)
             }
 
             function checkRowsForWin(row, symbol) {
