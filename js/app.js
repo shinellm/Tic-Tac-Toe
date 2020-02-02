@@ -209,7 +209,7 @@
                         if ($scope.movesLeft === 0 && $scope.gameStatus !== "game over") {
                             showStatusMsg();
                         }
-                        else {
+                        else if ($scope.gameStatus !== "game over") {
                             otherPlayersTurn();
                         }
                     }
