@@ -1,0 +1,32 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "This repo contains a tic-tac-toe game.",
+  "main": "index.js",
+  "dependencies": {
+    "@popperjs/core": "^2.0.5",
+    "angular": "^1.7.9",
+    "bootstrap": "^3.4.1",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "jasmine-core": "^3.5.0",
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shinellm/Tic-Tac-Toe.git"
+  },
+  "keywords": [],
+  "author": "Shinell Manwaring (https://github.com/shinellm)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shinellm/Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/shinellm/Tic-Tac-Toe#readme"
+}
